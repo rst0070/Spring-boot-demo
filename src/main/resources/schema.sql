@@ -1,0 +1,8 @@
+DROP TABLE IF EXISTS STUDENT;
+CREATE TABLE STUDENT (
+ student_id BIGINT PRIMARY KEY,
+ student_name VARCHAR(35),
+ email VARCHAR(320),
+ dob DATE,
+ age INT
+);
