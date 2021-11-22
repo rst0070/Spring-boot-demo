@@ -1,51 +1,42 @@
 package com.example.demo.student;
 
 import java.time.LocalDate;
+import javax.persistence.*;
+import lombok.Data;
 
-/**
- * data entity로서 역할
- * 
- */
+@Data
+@Table(name="STUDENT")
+@Entity
 public class Student {
+    @Id
+    @GeneratedValue( strategy = GenerationType.AUTO)
+    @Column( name = "student_id")
     private long id;
+
+    @Column( name = "student_name")
     private String name;
+    @Column( name = "email")
     private String email;
+    @Column( name = "dob")
     private LocalDate dob;
+
+    @Transient
     private int age;
 
-    public Student(long id, String name, String email, LocalDate dob, int age){
+    public Student(long id, String name, String email, LocalDate dob){
         this.id = id;
         this.name = name;
         this.email = email;
         this.dob = dob;
-        this.age = age;
+        this.age = LocalDate.now().getYear() - dob.getYear();
     }
 
-    public Student(String name, String email, LocalDate dob, int age){
+    public Student(String name, String email, LocalDate dob){
         this.name = name;
         this.email = email;
         this.dob = dob;
-        this.age = age;
+        this.age = LocalDate.now().getYear() - dob.getYear();
     }
 
-    public long getId(){ return id;}
-    public String getName(){return name;}
-    public String getEmail(){return email;}
-    public LocalDate getDob(){return dob;}
-    public int getAge(){ return age;}
-
-    public void setId(long id){this.id = id;}
-    public void setName(String name){this.name = name;}
-    public void setEmail(String email){this.email = email;}
-    public void setDob(LocalDate dob){this.dob = dob;}
-    public void setAge(int age){ this.age = age; }
-
-    @Override
-    public String toString(){
-        return id + ", " +
-        name + ", " +
-        email + ", " +
-        dob + ", " +
-        age;
-    }
+   
 }
