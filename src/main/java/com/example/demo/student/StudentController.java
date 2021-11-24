@@ -10,21 +10,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @RestController
-@RequestMapping(path="/")
+@RequestMapping(path = "/student")
 public class StudentController {
     
     @Autowired
     private StudentService service;
 
 
-    @GetMapping(path="get")
+    @GetMapping
     public List<Student> hello(){
         return service.getList();
     }
 
     @PostMapping
-    public String newStudent(@RequestBody Student student){
+    public void newStudent(@RequestBody Student student){
         service.saveNewStudent(student);
-        return "redirect:/get";
     }
 }
