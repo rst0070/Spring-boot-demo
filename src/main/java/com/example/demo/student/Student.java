@@ -23,6 +23,12 @@ public class Student {
     @Transient
     private int age;
 
+    /**
+     * json으로 student받을때 빈 생성자를 사용함.
+     */
+    public Student(){
+
+    }
     public Student(long id, String name, String email, LocalDate dob){
         this.id = id;
         this.name = name;

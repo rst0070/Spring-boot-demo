@@ -5,7 +5,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
 <body>
-    <h1>hello</h1>
+    <h1>Test Spring Rest api</h1>
     <div class="container" id="postDiv">
         <h2>POST request</h2>
         <label for="name">student name</label>
@@ -21,24 +21,19 @@
         <button onClick="GETAction()">get students information</button>
         <div id="GETResult"></div>
     </div>
-    <div class="container" id="putDiv">
-        <h2>PUT request</h2>
-    </div>
-    <div class="container" id="delteDiv">
+    <div class="container" id="deleteDiv">
         <h2>DELETE request</h2>
         <input type="text" placeholder="email of student to delete"/>
-        <button>delete</button>
+        <button onClick="DELETEAction()">delete</button>
     </div>
 
     <script>
 
         function POSTAction(){
             let stdata = {
-                student : {
-                    name : $('#postDiv input[name=name]').val(),
-                    email : $('#postDiv input[name=email]').val(),
-                    dob : $('#postDiv input[name=dob]').val()
-                }
+                "name" : $('#postDiv input[name=name]').val(),
+                "email" : $('#postDiv input[name=email]').val(),
+                "dob" : $('#postDiv input[name=dob]').val()
             }
             $.ajax({
                 url: "/student",
@@ -61,6 +56,22 @@
             })
         }
 
+        function DELETEAction(){
+            let email = $('#deleteDiv input').val();
+            let dataObj = {
+                "email" : email
+            };
+
+            $.ajax({
+                url: "/student",
+                method:"DELETE",
+                contentType:"application/text",
+                data : email,
+                success: (data) => {
+                  console.log(data);
+                } 
+            })
+        }
 
     </script>
 </body>
